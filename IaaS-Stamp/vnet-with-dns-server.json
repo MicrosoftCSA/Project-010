@@ -27,7 +27,7 @@
         "description": "The subnet definition for the VNET"
       }
     },
-    "gateway": {
+    "gatewaySettings": {
       "type": "array",
       "metadata": {
         "description": "The default gateway variables"

@@ -750,7 +750,7 @@
           "subnets": {
             "value": "[variables('subnets')]"
           },
-          "gateway": {
+          "gatewaySettings": {
             "value": "[variables('gatewaySettings')]"
           },
           "gatewaySubnetRef": {
@@ -828,7 +828,7 @@
           "subnets": {
             "value": "[variables('subnets')]"
           },
-          "gateway": {
+          "gatewaySettings": {
             "value": "[variables('gatewaySettings')]"
           },
           "gatewaySubnetRef": {
