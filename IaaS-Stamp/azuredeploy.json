@@ -325,11 +325,6 @@
       "appSubnetPrefix": "10.0.2.0/24",
       "sqlSubnetPrefix": "10.0.3.0/26"
     },
-    "gateway": {
-      "gatewayPublicIPName": "[concat(parameters('deploymentPrefix'),'GatewayPIP')]",
-      "gatewayName": "[concat(parameters('deploymentPrefix'),'Gateway')]",
-      "vpnClientAddressPool": "192.168.0.0/24"
-    },
     "subnets": [
       {
         "name": "[variables('subnetNames').gatewaySubnetName]",
@@ -357,6 +352,9 @@
       }
     ],
     "virtualNetworkAddressRange": "10.0.0.0/16",
+    "gatewayPublicIPName": "[concat(parameters('deploymentPrefix'),'GatewayPIP')]",
+    "gatewayName": "[concat(parameters('deploymentPrefix'),'Gateway')]",
+    "vpnClientAddressPool": "192.168.0.0/24",
     "RDPNAT": "RDP",
     "SQLAOProbe": "SQLAlwaysOnEndPointProbe",
     "primaryDCIPAddressName": "primaryDCIP",
@@ -852,8 +850,14 @@
           "virtualNetworkName": {
             "value": "[variables('virtualNetworkNameWithSuffix')]"
           },
-          "gateway": {
-            "value": "[variables('gateway')]"
+          "gatewayPublicIPName": {
+            "value": "[variables('gatewayPublicIPName')]"
+          },
+          "gatewayName": {
+            "value": "[variables('gatewayName')]"
+          },
+          "vpnClientAddressPool": {
+            "value": "[variables('vpnClientAddressPool')]"
           },
           "gatewaySubnetRef": {
             "value": "[variables('gatewaySubnetRef')]"

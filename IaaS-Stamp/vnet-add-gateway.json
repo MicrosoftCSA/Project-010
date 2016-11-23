@@ -14,10 +14,22 @@
         "description": "The name of the Virtual Network"
       }
     },
-    "gateway": {
-      "type": "array",
+    "gatewayPublicIPName": {
+      "type": "string",
       "metadata": {
-        "description": "The default gateway variables"
+        "description": "The name of the Virtual Network Gateway IP"
+      }
+    },
+    "gatewayName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Virtual Network Gateway"
+      }
+    },
+    "vpnClientAddressPool": {
+      "type": "string",
+      "metadata": {
+        "description": "The address range of the P2S Client Address Pool in CIDR format"
       }
     },
     "gatewaySubnetRef": {
