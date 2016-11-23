@@ -357,7 +357,7 @@
     "adBDCNicName": "[concat(variables('vmSettings').adBDCVMName,'-nic')]",
     "sqlwNicName": "[concat(variables('vmSettings').sqlwVMName,'-nic')]",
     "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkNameWithSuffix'))]",
-    "staticSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').staticSubnetName)]",
+    "mgmtSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').mgmtSubnetName)]",
     "sqlSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').sqlSubnetName)]",
     "ids": {
       "adNicId": "[resourceId('Microsoft.Network/networkInterfaces',variables('adPDCNicName'))]",
@@ -518,8 +518,8 @@
           "sqlLBIPAddress": {
             "value": "[parameters('sqlLBIPAddress')]"
           },
-          "staticSubnetRef": {
-            "value": "[variables('sqlSubnetRef')]"
+          "mgmtSubnetRef": {
+            "value": "[variables('mgmtSubnetRef')]"
           },
           "sqlLBBE": {
             "value": "[variables('lbSettings').sqlLBBE]"
@@ -562,8 +562,8 @@
           "adPDCNICIPAddress": {
             "value": "[parameters('adPDCNICIPAddress')]"
           },
-          "staticSubnetRef": {
-            "value": "[variables('staticSubnetRef')]"
+          "mgmtSubnetRef": {
+            "value": "[variables('mgmtSubnetRef')]"
           },
           "adBEAddressPoolID": {
             "value": "[variables('derivedIds').adBEAddressPoolID]"

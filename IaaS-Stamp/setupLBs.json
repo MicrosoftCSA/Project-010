@@ -14,7 +14,7 @@
       "sqlLBIPAddress":{  
          "type":"string"
       },
-      "staticSubnetRef":{  
+      "mgmtSubnetRef":{  
          "type":"string"
       },
       "sqlLBBE":{  
@@ -47,7 +47,7 @@
               "privateIPAllocationMethod": "Static",
               "privateIPAddress": "[parameters('sqlLBIPAddress')]",
               "subnet": {
-                "id": "[parameters('staticSubnetRef')]"
+                "id": "[parameters('mgmtSubnetRef')]"
               }
             }
           }

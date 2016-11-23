@@ -11,7 +11,7 @@
       "adPDCNICIPAddress":{  
          "type":"string"
       },
-      "staticSubnetRef":{  
+      "mgmtSubnetRef":{  
          "type":"string"
       },
       "adBEAddressPoolID":{  
@@ -64,8 +64,8 @@
                   "properties":{  
                      "privateIPAllocationMethod":"Static",
                      "privateIPAddress":"[parameters('adPDCNICIPAddress')]",
-                     "subnet":{  
-                        "id":"[parameters('staticSubnetRef')]"
+                     "subnet":{
+                      "id": "[parameters('mgmtSubnetRef')]"
                      },
                      "publicIpAddress":{  
                         "id":"[resourceId(resourceGroup().Name,'Microsoft.Network/publicIpAddresses', parameters('primaryDCIPAddressNameWithSuffix'))]"
@@ -88,7 +88,7 @@
                   "privateIPAllocationMethod": "Static",
                   "privateIPAddress": "[parameters('adBDCNICIPAddress')]",
                   "subnet": {
-                    "id": "[parameters('staticSubnetRef')]"
+                    "id": "[parameters('mgmtSubnetRef')]"
                   },
                   "publicIpAddress": {
                     "id": "[resourceId(resourceGroup().Name,'Microsoft.Network/publicIpAddresses', parameters('backupDCIPAddressNameWithSuffix'))]"
