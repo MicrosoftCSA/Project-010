@@ -321,7 +321,6 @@
       "sqlLBName": "sqlLoadBalancer"
     },
     "subnetNames": {
-      "gatewaySubnetName": "gatewaySubnet",
       "mgmtSubnetName": "mgmtSubnet",
       "appSubnetName": "appSubnet",
       "sqlSubnetName": "sqlSubnet"
@@ -390,12 +389,6 @@
     "Never": false,
     "Everyday": true,
     "subnets": [
-      {
-        "name": "[variables('subnetNames').gatewaySubnetName]",
-        "properties": {
-          "addressPrefix": "10.0.0.0/24"
-        }
-      },
       {
         "name": "[variables('subnetNames').mgmtSubnetName]",
         "properties": {
