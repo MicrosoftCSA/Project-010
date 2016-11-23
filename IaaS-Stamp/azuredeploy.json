@@ -430,6 +430,7 @@
     "dcStorageAccountType": "Standard_LRS",
     "configuration": {
       "vnetwithDNSTemplateURL": "[concat(parameters('templatesBaseUrl'),'/vnet-with-dns-server.json')]",
+      "vnetaddGatewayURL": "[concat(parameters('templatesBaseUrl'),'/vnet-add-gateway.json')]",
       "nicTemplateURL": "[concat(parameters('templatesBaseUrl'),'/nic.json')]",
       "rdpIPAdressSetupURL": "[concat(parameters('templatesBaseUrl'),'/publicip-rdp.json')]",
       "vnetSetupURL": "[concat(parameters('templatesBaseUrl'),'/vnet-new.json')]",
@@ -827,6 +828,35 @@
               "[parameters('adPDCNICIPAddress')]",
               "[parameters('adBDCNICIPAddress')]"
             ]
+          }
+        }
+      }
+    },
+    {
+      "name": "UpdatingGateway",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/UpdatingDNSwithBackupADVM"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('configuration').vnetaddGatewayURL]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[resourceGroup().location]"
+          },
+          "virtualNetworkName": {
+            "value": "[variables('virtualNetworkNameWithSuffix')]"
+          },
+          "gateway": {
+            "value": "[variables('gateway')]"
+          },
+          "gatewaySubnetRef": {
+            "value": "[variables('gatewaySubnetRef')]"
           }
         }
       }
