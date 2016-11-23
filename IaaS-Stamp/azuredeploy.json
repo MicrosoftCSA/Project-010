@@ -325,11 +325,7 @@
       "appSubnetPrefix": "10.0.2.0/24",
       "sqlSubnetPrefix": "10.0.3.0/26"
     },
-    "gateway": {
-      "gatewayPublicIPName": "[concat(parameters('deploymentPrefix'),'GatewayPIP')]",
-      "gatewayName": "[concat(parameters('deploymentPrefix'),'Gateway')]",
-      "vpnClientAddressPool":  "192.168.0.0/24"
-    },
+
     "subnets": [
       {
         "name": "[variables('subnetNames').gatewaySubnetName]",
