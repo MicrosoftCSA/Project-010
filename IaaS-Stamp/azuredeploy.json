@@ -334,25 +334,25 @@
       {
         "name": "[variables('subnetNames').gatewaySubnetName]",
         "properties": {
-          "addressPrefix": "[variables('subnetPrefixes').gatewaySubnetPrefix]"
+          "addressPrefix": "10.0.0.0/24"
         }
       },
       {
         "name": "[variables('subnetNames').mgmtSubnetName]",
         "properties": {
-          "addressPrefix": "[variables('subnetPrefixes').mgmtSubnetPrefix]"
+          "addressPrefix": "10.0.1.0/24"
         }
       },
       {
         "name": "[variables('subnetNames').appSubnetName]",
         "properties": {
-          "addressPrefix": "[variables('subnetPrefixes').appSubnetPrefix]"
+          "addressPrefix": "10.0.2.0/24"
         }
       },
       {
         "name": "[variables('subnetNames').sqlSubnetName]",
         "properties": {
-          "addressPrefix": "[variables('subnetPrefixes').sqlSubnetPrefix]"
+          "addressPrefix": "10.0.3.0/26"
         }
       }
     ],
