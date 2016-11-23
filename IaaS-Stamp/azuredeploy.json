@@ -833,7 +833,7 @@
       }
     },
     {
-      "name": "UpdatingGateway",
+      "name": "UpdatingVNETGateway",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
@@ -866,7 +866,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+        "Microsoft.Resources/deployments/UpdatingVNETGateway"
       ],
       "properties": {
         "mode": "Incremental",
