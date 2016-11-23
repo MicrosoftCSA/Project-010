@@ -54,7 +54,7 @@
       "metadata": {
         "description": "The size of the AD VMs Created"
       },
-      "defaultValue": "Standard_D1"
+      "defaultValue": "Standard_D2"
     },
     "sqlVMSize": {
       "type": "string",
@@ -79,7 +79,7 @@
       "metadata": {
         "description": "The size of the SQL VMs Created"
       },
-      "defaultValue": "Standard_DS4_v2"
+      "defaultValue": "Standard_DS2"
     },
     "witnessVMSize": {
       "type": "string",
@@ -104,7 +104,7 @@
       "metadata": {
         "description": "The size of the Witness VM Created"
       },
-      "defaultValue": "Standard_DS1_v2"
+      "defaultValue": "Standard_DS2"
     },
     "domainName": {
       "type": "string",
@@ -324,11 +324,6 @@
       "mgmtSubnetPrefix": "10.0.1.0/24",
       "appSubnetPrefix": "10.0.2.0/24",
       "sqlSubnetPrefix": "10.0.3.0/26"
-    },
-    "gateway": {
-      "gatewayPublicIPName": "[concat(parameters('deploymentPrefix'),'GatewayPIP')]",
-      "gatewayName": "[concat(parameters('deploymentPrefix'),'Gateway')]",
-      "vpnClientAddressPool":  "192.168.0.0/24"
     },
     "subnets": [
       {
