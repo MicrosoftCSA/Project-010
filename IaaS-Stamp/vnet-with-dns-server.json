@@ -97,6 +97,10 @@
             "name": "vnetGatewayConfig"
           }
         ],
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
         "gatewayType": "Vpn",
         "vpnType": "RouteBased",
         "enableBgp": "false",
