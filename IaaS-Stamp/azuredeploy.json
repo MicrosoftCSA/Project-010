@@ -203,14 +203,14 @@
       "metadata": {
         "description": "Linked Templates base url"
       },
-      "defaultValue": "http://sqlvmgroup.blob.core.windows.net/autoha09302016"
+      "defaultValue": "https://raw.githubusercontent.com/albertwo1978/Project-010/master/IaaS-Stamp"
     },
     "scriptsBaseUrl": {
       "type": "string",
       "metadata": {
         "description": "DSC Scripts base url"
       },
-      "defaultValue": "http://sqlvmgroup.blob.core.windows.net/autoha09302016"
+      "defaultValue": "https://raw.githubusercontent.com/albertwo1978/Project-010/master/IaaS-Stamp"
     },
     "autoPatchingDay": {
       "type": "string",
