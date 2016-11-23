@@ -325,11 +325,6 @@
       "appSubnetPrefix": "10.0.2.0/24",
       "sqlSubnetPrefix": "10.0.3.0/26"
     },
-    "gatewaySettings": {
-
-
-
-    },
     "subnets": [
       {
         "name": "[variables('subnetNames').gatewaySubnetName]",
@@ -750,9 +745,7 @@
           "subnets": {
             "value": "[variables('subnets')]"
           },
-          "gatewaySettings": {
-            "value": "[variables('gatewaySettings')]"
-          },
+
           "gatewaySubnetRef": {
             "value": "[variables('gatewaySubnetRef')]"
           },
@@ -827,9 +820,6 @@
           },
           "subnets": {
             "value": "[variables('subnets')]"
-          },
-          "gatewaySettings": {
-            "value": "[variables('gatewaySettings')]"
           },
           "gatewaySubnetRef": {
             "value": "[variables('gatewaySubnetRef')]"
