@@ -745,9 +745,6 @@
           "subnets": {
             "value": "[variables('subnets')]"
           },
-          "gatewaySubnetRef": {
-            "value": "[variables('gatewaySubnetRef')]"
-          },
           "DNSServerAddress": {
             "value": [
               "[parameters('adPDCNICIPAddress')]"
@@ -819,9 +816,6 @@
           },
           "subnets": {
             "value": "[variables('subnets')]"
-          },
-          "gatewaySubnetRef": {
-            "value": "[variables('gatewaySubnetRef')]"
           },
           "DNSServerAddress": {
             "value": [
