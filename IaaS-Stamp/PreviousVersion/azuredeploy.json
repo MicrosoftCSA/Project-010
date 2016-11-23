@@ -149,40 +149,26 @@
       },
       "defaultValue": "10.0.0.0/16"
     },
-    "staticSubnet": {
-      "type": "string",
-      "metadata": {
-        "description": "The address range of the subnet static IPs are allocated from in the new VNET"
-      },
-      "defaultValue": "10.0.0.0/24"
-    },
-    "sqlSubnet": {
-      "type": "string",
-      "metadata": {
-        "description": "The address range of the SQL subnet created in the new VNET"
-      },
-      "defaultValue": "10.0.1.0/26"
-    },
     "adPDCNICIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new AD VM"
       },
-      "defaultValue": "10.0.0.4"
+      "defaultValue": "10.0.1.4"
     },
     "adBDCNICIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new backup AD VM"
       },
-      "defaultValue": "10.0.0.5"
+      "defaultValue": "10.0.1.5"
     },
     "sqlLBIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new SQL Server Internal Load Balancer"
       },
-      "defaultValue": "10.0.1.9"
+      "defaultValue": "10.0.3.9"
     },
     "deploymentPrefix": {
       "type": "string",
@@ -297,7 +283,7 @@
       "metadata": {
         "description": "The Sql Server Version"
       },
-      "defaultValue": "SQL2014SP1-WS2012R2"
+      "defaultValue": "SQL2016-WS2012R2-ENT"
     },
     "numberOfSqlVMDisks": {
       "type": "string",
@@ -335,7 +321,9 @@
       "sqlLBName": "sqlLoadBalancer"
     },
     "subnetNames": {
-      "staticSubnetName": "staticSubnet",
+      "gatewaySubnetName": "gatewaySubnet",
+      "mgmtSubnetName": "mgmtSubnet",
+      "appSubnetName": "appSubnet",
       "sqlSubnetName": "sqlSubnet"
     },
     "RDPNAT": "RDP",
@@ -370,7 +358,8 @@
     "adBDCNicName": "[concat(variables('vmSettings').adBDCVMName,'-nic')]",
     "sqlwNicName": "[concat(variables('vmSettings').sqlwVMName,'-nic')]",
     "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkNameWithSuffix'))]",
-    "staticSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').staticSubnetName)]",
+    "gatewaySubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').gatewaySubnetName)]",
+    "mgmtSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').mgmtSubnetName)]",
     "sqlSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').sqlSubnetName)]",
     "ids": {
       "adNicId": "[resourceId('Microsoft.Network/networkInterfaces',variables('adPDCNicName'))]",
@@ -403,15 +392,27 @@
     "Everyday": true,
     "subnets": [
       {
-        "name": "[variables('subnetNames').staticSubnetName]",
+        "name": "[variables('subnetNames').gatewaySubnetName]",
         "properties": {
-          "addressPrefix": "[parameters('staticSubnet')]"
+          "addressPrefix": "10.0.0.0/24"
+        }
+      },
+      {
+        "name": "[variables('subnetNames').mgmtSubnetName]",
+        "properties": {
+          "addressPrefix": "10.0.1.0/24"
+        }
+      },
+      {
+        "name": "[variables('subnetNames').appSubnetName]",
+        "properties": {
+          "addressPrefix": "10.0.2.0/24"
         }
       },
       {
         "name": "[variables('subnetNames').sqlSubnetName]",
         "properties": {
-          "addressPrefix": "[parameters('sqlSubnet')]"
+          "addressPrefix": "10.0.3.0/26"
         }
       }
     ],
@@ -525,7 +526,7 @@
           "sqlLBIPAddress": {
             "value": "[parameters('sqlLBIPAddress')]"
           },
-          "staticSubnetRef": {
+          "mgmtSubnetRef": {
             "value": "[variables('sqlSubnetRef')]"
           },
           "sqlLBBE": {
@@ -569,8 +570,8 @@
           "adPDCNICIPAddress": {
             "value": "[parameters('adPDCNICIPAddress')]"
           },
-          "staticSubnetRef": {
-            "value": "[variables('staticSubnetRef')]"
+          "mgmtSubnetRef": {
+            "value": "[variables('mgmtSubnetRef')]"
           },
           "adBEAddressPoolID": {
             "value": "[variables('derivedIds').adBEAddressPoolID]"

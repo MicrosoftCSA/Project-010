@@ -142,13 +142,6 @@
       },
       "defaultValue": "Premium_LRS"
     },
-    "virtualNetworkAddressRange": {
-      "type": "string",
-      "metadata": {
-        "description": "The address range of the new VNET in CIDR format"
-      },
-      "defaultValue": "10.0.0.0/16"
-    },
     "adPDCNICIPAddress": {
       "type": "string",
       "metadata": {
@@ -321,10 +314,49 @@
       "sqlLBName": "sqlLoadBalancer"
     },
     "subnetNames": {
+      "gatewaySubnetName": "GatewaySubnet",
       "mgmtSubnetName": "mgmtSubnet",
       "appSubnetName": "appSubnet",
       "sqlSubnetName": "sqlSubnet"
     },
+    "subnetPrefixes": {
+      "gatewaySubnetPrefix": "10.0.0.0/24",
+      "mgmtSubnetPrefix": "10.0.1.0/24",
+      "appSubnetPrefix": "10.0.2.0/24",
+      "sqlSubnetPrefix": "10.0.3.0/26"
+    },
+    "gateway": {
+      "gatewayPublicIPName": "[concat(parameters('deploymentPrefix'),'GatewayPIP')]",
+      "gatewayName": "[concat(parameters('deploymentPrefix'),'Gateway')]",
+      "vpnClientAddressPool":  "192.168.0.0/24"
+    },
+    "subnets": [
+      {
+        "name": "[variables('subnetNames').gatewaySubnetName]",
+        "properties": {
+          "addressPrefix": "[variables('subnetPrefixes').gatewaySubnetPrefix]"
+        }
+      },
+      {
+        "name": "[variables('subnetNames').mgmtSubnetName]",
+        "properties": {
+          "addressPrefix": "[variables('subnetPrefixes').mgmtSubnetPrefix]"
+        }
+      },
+      {
+        "name": "[variables('subnetNames').appSubnetName]",
+        "properties": {
+          "addressPrefix": "[variables('subnetPrefixes').appSubnetPrefix]"
+        }
+      },
+      {
+        "name": "[variables('subnetNames').sqlSubnetName]",
+        "properties": {
+          "addressPrefix": "[variables('subnetPrefixes').sqlSubnetPrefix]"
+        }
+      }
+    ],
+    "virtualNetworkAddressRange": "10.0.0.0/16",
     "RDPNAT": "RDP",
     "SQLAOProbe": "SQLAlwaysOnEndPointProbe",
     "primaryDCIPAddressName": "primaryDCIP",
@@ -357,6 +389,7 @@
     "adBDCNicName": "[concat(variables('vmSettings').adBDCVMName,'-nic')]",
     "sqlwNicName": "[concat(variables('vmSettings').sqlwVMName,'-nic')]",
     "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkNameWithSuffix'))]",
+    "gatewaySubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').gatewaySubnetName)]",
     "mgmtSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').mgmtSubnetName)]",
     "sqlSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('subnetNames').sqlSubnetName)]",
     "ids": {
@@ -388,26 +421,6 @@
     "Sunday": true,
     "Never": false,
     "Everyday": true,
-    "subnets": [
-      {
-        "name": "[variables('subnetNames').mgmtSubnetName]",
-        "properties": {
-          "addressPrefix": "10.0.1.0/24"
-        }
-      },
-      {
-        "name": "[variables('subnetNames').appSubnetName]",
-        "properties": {
-          "addressPrefix": "10.0.2.0/24"
-        }
-      },
-      {
-        "name": "[variables('subnetNames').sqlSubnetName]",
-        "properties": {
-          "addressPrefix": "10.0.3.0/26"
-        }
-      }
-    ],
     "virtualNetworkNameWithSuffix": "[substring(concat(parameters('virtualNetworkName'), uniqueString(parameters('sqlStorageAccountName'))),0,15)]",
     "primaryDCIPAddressNameWithSuffix": "[substring(concat(variables('primaryDCIPAddressName'), uniqueString(parameters('sqlStorageAccountName'))),0,15)]",
     "backupDCIPAddressNameWithSuffix": "[substring(concat(variables('backupDCIPAddressName'), uniqueString(parameters('sqlStorageAccountName'))),0,15)]",
@@ -483,7 +496,7 @@
             "value": "[variables('virtualNetworkNameWithSuffix')]"
           },
           "virtualNetworkAddressRange": {
-            "value": "[parameters('virtualNetworkAddressRange')]"
+            "value": "[variables('virtualNetworkAddressRange')]"
           },
           "subnets": {
             "value": "[variables('subnets')]"
@@ -732,10 +745,16 @@
             "value": "[variables('virtualNetworkNameWithSuffix')]"
           },
           "virtualNetworkAddressRange": {
-            "value": "[parameters('virtualNetworkAddressRange')]"
+            "value": "[variables('virtualNetworkAddressRange')]"
           },
           "subnets": {
             "value": "[variables('subnets')]"
+          },
+          "gateway": {
+            "value": "[variables('gateway')]"
+          },
+          "gatewaySubnetRef": {
+            "value": "[variables('gatewaySubnetRef')]"
           },
           "DNSServerAddress": {
             "value": [
@@ -804,10 +823,16 @@
             "value": "[variables('virtualNetworkNameWithSuffix')]"
           },
           "virtualNetworkAddressRange": {
-            "value": "[parameters('virtualNetworkAddressRange')]"
+            "value": "[variables('virtualNetworkAddressRange')]"
           },
           "subnets": {
             "value": "[variables('subnets')]"
+          },
+          "gateway": {
+            "value": "[variables('gateway')]"
+          },
+          "gatewaySubnetRef": {
+            "value": "[variables('gatewaySubnetRef')]"
           },
           "DNSServerAddress": {
             "value": [

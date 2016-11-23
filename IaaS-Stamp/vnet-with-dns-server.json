@@ -27,6 +27,18 @@
         "description": "The subnet definition for the VNET"
       }
     },
+    "gateway": {
+      "type": "array",
+      "metadata": {
+        "description": "The default gateway variables"
+      }
+    },
+    "gatewaySubnetRef": {
+      "type": "string",
+      "metadata": {
+        "description": "Reference to the subnet where Gateway is assigned"
+      }
+    },
     "DNSServerAddress": {
       "type": "array",
       "metadata": {
@@ -35,6 +47,15 @@
     }
   },
   "resources": [
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('gateway').gatewayPublicIPName]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic"
+      }
+    },
     {
       "name": "[parameters('virtualNetworkName')]",
       "type": "Microsoft.Network/virtualNetworks",
@@ -50,6 +71,42 @@
           "dnsServers": "[parameters('DNSServerAddress')]"
         },
         "subnets": "[parameters('subnets')]"
+      }
+    },
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Network/virtualNetworkGateways",
+      "name": "[parameters('gateway').gatewayName]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', parameters('gateway').gatewayPublicIPName)]",
+        "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[parameters('gatewaySubnetRef')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('gateway').gatewayPublicIPName)]"
+              }
+            },
+            "name": "vnetGatewayConfig"
+          }
+        ],
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "enableBgp": "false",
+        "vpnClientConfiguration": {
+          "vpnClientAddressPool": {
+            "addressPrefixes": [
+              "[parameters('gateway').vpnClientAddressPoolPrefix]"
+            ]
+          }
+        }
       }
     }
   ]
