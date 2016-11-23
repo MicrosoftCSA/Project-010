@@ -519,7 +519,7 @@
             "value": "[parameters('sqlLBIPAddress')]"
           },
           "mgmtSubnetRef": {
-            "value": "[variables('mgmtSubnetRef')]"
+            "value": "[variables('sqlSubnetRef')]"
           },
           "sqlLBBE": {
             "value": "[variables('lbSettings').sqlLBBE]"
