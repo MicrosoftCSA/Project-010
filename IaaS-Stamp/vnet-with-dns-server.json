@@ -67,10 +67,10 @@
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Network/virtualNetworkGateways",
-      "name": "[parameters('gateway').gatewayName]",
+      "name": "[parameters('gatewaySettings').gatewayName]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', parameters('gateway').gatewayPublicIPName)]",
+        "[concat('Microsoft.Network/publicIPAddresses/', parameters('gatewaySettings').gatewayPublicIPName)]",
         "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
       ]
     }
