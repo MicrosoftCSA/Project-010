@@ -325,7 +325,7 @@
       "appSubnetPrefix": "10.0.2.0/24",
       "sqlSubnetPrefix": "10.0.3.0/26"
     },
-    "gateway": {
+    "gatewaySettings": {
 
 
 
