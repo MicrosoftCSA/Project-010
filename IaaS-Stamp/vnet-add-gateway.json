@@ -48,46 +48,6 @@
       "properties": {
         "publicIPAllocationMethod": "Dynamic"
       }
-    },
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Network/virtualNetworkGateways",
-      "name": "[parameters('gatewayName')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', parameters('gatewayPublicIPName'))]",
-        "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
-      ],
-      "properties": {
-        "ipConfigurations": [
-          {
-            "properties": {
-              "privateIPAllocationMethod": "Dynamic",
-              "subnet": {
-                "id": "[parameters('gatewaySubnetRef')]"
-              },
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('gatewayPublicIPName'))]"
-              }
-            },
-            "name": "vnetGatewayConfig"
-          }
-        ],
-        "sku": {
-          "name": "Standard",
-          "tier": "Standard"
-        },
-        "gatewayType": "Vpn",
-        "vpnType": "RouteBased",
-        "enableBgp": "false",
-        "vpnClientConfiguration": {
-          "vpnClientAddressPool": {
-            "addressPrefixes": [
-              "[parameters('vpnClientAddressPool')]"
-            ]
-          }
-        }
-      }
     }
   ]
 }
