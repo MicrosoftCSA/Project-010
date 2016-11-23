@@ -327,7 +327,7 @@
     },
     "gateway": {
 
-      "gatewayName": "[concat(parameters('deploymentPrefix'),'Gateway')]",
+
       "vpnClientAddressPool":  "192.168.0.0/24"
     },
     "subnets": [
