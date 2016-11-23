@@ -301,7 +301,7 @@
       "metadata": {
         "description": "The Sql VM work load type: GENERAL - general work load; DW - datawear house work load; OLTP - Transactional processing work load"
       },
-      "defaultValue": "OLTP"
+      "defaultValue": "GENERAL"
     }
   },
   "variables": {
@@ -324,6 +324,11 @@
       "mgmtSubnetPrefix": "10.0.1.0/24",
       "appSubnetPrefix": "10.0.2.0/24",
       "sqlSubnetPrefix": "10.0.3.0/26"
+    },
+    "gateway": {
+      "gatewayPublicIPName": "[concat(parameters('deploymentPrefix'),'GatewayPIP')]",
+      "gatewayName": "[concat(parameters('deploymentPrefix'),'Gateway')]",
+      "vpnClientAddressPool":  "192.168.0.0/24"
     },
     "subnets": [
       {
@@ -745,7 +750,9 @@
           "subnets": {
             "value": "[variables('subnets')]"
           },
-
+          "gateway": {
+            "value": "[variables('gateway')]"
+          },
           "gatewaySubnetRef": {
             "value": "[variables('gatewaySubnetRef')]"
           },
@@ -820,6 +827,9 @@
           },
           "subnets": {
             "value": "[variables('subnets')]"
+          },
+          "gateway": {
+            "value": "[variables('gateway')]"
           },
           "gatewaySubnetRef": {
             "value": "[variables('gatewaySubnetRef')]"
