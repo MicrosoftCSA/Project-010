@@ -1,0 +1,81 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string",
+      "metadata": {
+        "description": "The region to deploy the resources into"
+      }
+    },
+    "virtualNetworkName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Virtual Network"
+      }
+    },
+    "gateway": {
+      "type": "array",
+      "metadata": {
+        "description": "The default gateway variables"
+      }
+    },
+    "gatewaySubnetRef": {
+      "type": "string",
+      "metadata": {
+        "description": "Reference to the subnet where Gateway is assigned"
+      }
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('gateway').gatewayPublicIPName]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic"
+      }
+    },
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Network/virtualNetworkGateways",
+      "name": "[parameters('gateway').gatewayName]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', parameters('gateway').gatewayPublicIPName)]",
+        "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[parameters('gatewaySubnetRef')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('gateway').gatewayPublicIPName)]"
+              }
+            },
+            "name": "vnetGatewayConfig"
+          }
+        ],
+        "sku": {
+          "name": "Standard",
+          "tier": "Standard"
+        },
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "enableBgp": "false",
+        "vpnClientConfiguration": {
+          "vpnClientAddressPool": {
+            "addressPrefixes": [
+              "[parameters('gateway').vpnClientAddressPoolPrefix]"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
