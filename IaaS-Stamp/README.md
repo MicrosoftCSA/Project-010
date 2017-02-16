@@ -6,6 +6,12 @@ In addition to the servers, the template creates the underlying Azure Virtual Ne
 Template to deploy App Service Plan with Redis Cache:
 https://github.com/albertwo1978/Project-010/tree/master/PaaSwRedis-Stamp
 
+Below is a logical layout of the resources deployed by the template: 
+
+Azure Region - 
+    Virtual Network - 
+        GatewaySubnet <->Standard VPN Gateway w/ VPN Client IP pool (192.168.0.0/24)</->
+        mgmtSubnet 
 Click the button below to deploy from the portal:
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Falbertwo1978%2FProject-010%2Fmaster%2FIaaS-Stamp%2Fazuredeploy.json" target="_blank">
