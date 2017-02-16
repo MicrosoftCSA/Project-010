@@ -13,7 +13,7 @@ Below is a logical layout of the resources deployed by the template:
         +   GatewaySubnet - Standard VPN Gateway w/ VPN Client IP pool (192.168.0.0/24) 
         +   mgmtSubnet &nbsp;&nbsp;&nbsp;   - Two Windows Server 2016 Domain Controllers in an Azure Availability Set 
         +   appSubnet  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   - EMPTY 
-        +   sqlSubnet  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   - Three node SQL Always on Availability Group in an Azure Availability Set 
+        +   sqlSubnet  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   - Three node SQL Always on Availability Group in an Azure Availability Set 
             + NOTE: Templates allows selection between SQL 2012, 2014 and 2016 
 
 Click the button below to deploy from the portal:
