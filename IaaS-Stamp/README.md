@@ -3,7 +3,7 @@ This template will create a standalone Windows Server Domain with two Domain Con
 
 In addition to the servers, the template creates the underlying Azure Virtual Network with isolated subnets for management, applications and sql. Finally, the template also creates a Virtual Network Gateway with client IP pool for connection to an Azure App Service Plan. This template is intended to work in tandem with the PaaSwRedis-Stamp templates (URL below) to deploy an App Service with Redis cache and a SQL database backend:
 
-Template to deploy App Service Plan with Redis Cache:
+Template to deploy App Service Plan with Redis Cache:<br>
 https://github.com/albertwo1978/Project-010/tree/master/PaaSwRedis-Stamp
 
 Below is a logical layout of the resources deployed by the template: 
