@@ -11,7 +11,7 @@ Below is a logical layout of the resources deployed by the template:
 +   Azure Region - 
     +   Virtual Network - 
         +   GatewaySubnet - Standard VPN Gateway w/ VPN Client IP pool (192.168.0.0/24) 
-        +   mgmtSubnet    - Two Windows Server 2016 Domain Controllers in an Azure Availability Set 
+        +   mgmtSubnet &nbsp;&nbsp;&nbsp;   - Two Windows Server 2016 Domain Controllers in an Azure Availability Set 
         +   appSubnet     - EMPTY 
         +   sqlSubnet     - Three node SQL Always on Availability Group in an Azure Availability Set 
             + NOTE: Templates allows selection between SQL 2012, 2014 and 2016 
